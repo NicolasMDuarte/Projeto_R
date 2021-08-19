@@ -1,15 +1,19 @@
-install.packages("cran/ggplot2")
+install.packages("ggplot2")
 library(ggplot2)
 
 names <- c("horario", "temp", "vento", "umid", "sensa")
 con <- url("http://ic.unicamp.br/~zanoni/cepagri/cepagri.csv")
 cepagri <- read.csv(con, header = FALSE, sep = ";", col.names = names)
 
-horario <- cepagri$horario
+horario <- as.Date(strtrim(cepagri$horario, 10), format = "%d/%m/%Y")
 temp <- cepagri$temp
 vento <- cepagri$vento
 umid <- cepagri$umid
 sensa <- cepagri$sensa
+
+start_date <- as.Date("2015/01/01")
+end_date <- as.Date("2020/12/31")
+hor <- horario[horario >= start_date & horario <= end_date]
 
 df <- data.frame(100:100, horario, temp)
 
