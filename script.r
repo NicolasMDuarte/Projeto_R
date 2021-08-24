@@ -15,7 +15,7 @@ start_date <- as.Date("2015/01/01")
 end_date <- as.Date("2020/12/31")
 hor <- horario[horario >= start_date & horario <= end_date]
 
-df <- data.frame(100:100, horario, temp)
+df <- data.frame(horario, temp)
 
 pdf("grafico.pdf") # Indica o arquivo que o gráfico será salvo
 p <- ggplot(df, aes(x = horario,y = temp)) # Gera o gráfico
