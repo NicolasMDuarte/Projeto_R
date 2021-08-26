@@ -62,13 +62,6 @@ sensaVent <- ggplot(data, aes(x = sensa, y = vento, color=vento)) +
 plot_grid(horSensa, horTemp, horVent, horUmid, tempSensa, sensaVent, labels = "AUTO")
 sv <- plot_grid(horSensa, horTemp, horVent, horUmid, tempSensa, sensaVent, labels = "AUTO")
 save_plot("plot.png", sv, ncol = 2)
-#Salvando os graficos - NAO ESTA SALVANDO OS DADOS - TENTAR FAZER EM PNG OU SEI LA
-#ggsave("grafico_horSensa.png", plot = horSensa)
-#ggsave("grafico_horTemp.png", plot = horTemp)
-#ggsave("grafico_horVent.png", plot = horVent)
-#ggsave("grafico_horUmid.png", plot = horUmid)
-#ggsave("grafico_tempSensa.png", plot = tempSensa)
-#ggsave("grafico_sensaVent.png", plot = sensaVent)
 
 #dev.off () # Fecha o arquivo
 rm(list=ls()) #remove as variaveis
