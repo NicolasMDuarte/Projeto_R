@@ -24,43 +24,41 @@ data <- data.frame(
 )
 
 data <- data[data$horario >= start_date & data$horario <= end_date,] #remocao das datas nao utilizadas para analise
-data <- data[data$sensa <= 40,]
-
+data <- data[data$sensa <= 40,] #remocao de dados absurdos
 data <- na.omit(data) #remocao de dados incompletos ou ausentes
 
-horSensa <- ggplot(data, aes(x = horario, y = sensa, color=sensa)) +
-  geom_point(alpha = 0.1) +
-  labs(x = "Ano", y = "Sens. Térm.(°C)", color = "Sens. Térm.(°C)") +
-  coord_cartesian(ylim=c(-10,40)) +
-  scale_color_gradient(low="turquoise3", high="violetred2") #desenho dos graficos
+#desenho dos graficos
+horSensa <- ggplot(data, aes(x = horario, y = sensa, color=sensa)) + #definicao dos dados e daquele que definira a cor do grafico
+  geom_point(alpha = 0.1) + #grafico de pontos
+  labs(x = "Ano", y = "Sens. TÃ©rm.(Â°C)", color = "Sens. TÃ©rm.(Â°C)") + #legendas
+  coord_cartesian(ylim=c(-10,40)) + #limites para o grafico
+  scale_color_gradient(low="turquoise3", high="violetred2") #gradiente de cor
 horTemp <- ggplot(data, aes(x = horario, y = temp, color=temp)) +
   geom_point(alpha = 0.1) +
-  labs(x = "Ano", y = "Temperatura (°C)", color = "Temperatura (°C)") +
+  labs(x = "Ano", y = "Temperatura (Â°C)", color = "Temperatura (Â°C)") +
   coord_cartesian(ylim=c(0,40)) +
-  scale_color_gradient(low="coral", high="red") #desenho dos graficos
+  scale_color_gradient(low="coral", high="red")
 horVent <- ggplot(data, aes(x = horario, y = vento, color=vento)) +
   geom_point(alpha = 0.1) +
   labs(x = "Ano", y = "Vento (Km/h)", color = "Vento") +
   coord_cartesian(ylim=c(0,125)) +
-  scale_color_gradient(low="seagreen1", high="seagreen") #desenho dos graficos
+  scale_color_gradient(low="seagreen1", high="seagreen")
 horUmid <- ggplot(data, aes(x = horario, y = umid, color=umid)) +
   geom_point(alpha = 0.1) +
   labs(x = "Ano", y = "Umidade (%)", color = "Umidade") +
   coord_cartesian(ylim=c(-20,100)) +
-  scale_color_gradient(low="deepskyblue", high="deepskyblue4")#desenho dos graficos
+  scale_color_gradient(low="deepskyblue", high="deepskyblue4")
 tempSensa <- ggplot(data, aes(x = temp, y = sensa, color=sensa)) +
   geom_point(alpha = 0.1) +
-  labs(x = "Temp. (°C)", y = "Sens. Térm.(°C)", color = "Sens. Térm.(°C)") +
+  labs(x = "Temp. (Â°C)", y = "Sens. TÃ©rm.(Â°C)", color = "Sens. TÃ©rm.(Â°C)") +
   coord_cartesian(ylim=c(-10,40)) +
-  scale_color_gradient(low="turquoise3", high="violetred2") #desenho dos graficos
+  scale_color_gradient(low="turquoise3", high="violetred2") 
 sensaVent <- ggplot(data, aes(x = sensa, y = vento, color=vento)) +
   geom_point(alpha = 0.1) +
-  labs(x = "Sens. Térm.(°C)", y = "Vento (Km/h)", color = "Vento") +
+  labs(x = "Sens. TÃ©rm.(Â°C)", y = "Vento (Km/h)", color = "Vento") +
   coord_cartesian(ylim=c(0,125)) +
-  scale_color_gradient(low="seagreen1", high="seagreen") #desenho dos graficos
+  scale_color_gradient(low="seagreen1", high="seagreen") 
 
-#plot_grid(horSensa, horTemp, horVent, horUmid, tempSensa, sensaVent, labels = "AUTO")
-save_plot("plot.png", plot_grid(horSensa, horTemp, horVent, horUmid, tempSensa, sensaVent, labels = "AUTO"), ncol = 2, base_height = 5)
+save_plot("plot.png", plot_grid(horSensa, horTemp, horVent, horUmid, tempSensa, sensaVent, labels = "AUTO"), ncol = 2, base_height = 5) #salva os dados
 
-#dev.off () # Fecha o arquivo
 rm(list=ls()) #remove as variaveis
